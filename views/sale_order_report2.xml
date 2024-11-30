@@ -49,23 +49,26 @@
                         <div class="page text-dark"
                              style="font-family:'Roboto',sans-serif;margin-top:100px; font-size:10px">
 
-                            <div class="row mt-5" style="font-family:'Times New Roman',sans-serif">
-                                <div class="col-5 mt-5" name="company_address" style="text-align:left;  ">
-                                    <img src="/sale_order_report/static/description/siemens_logo.jpg"
-                                         style="height: 99px"/>
+                            <div class="row" style="font-family:'Times New Roman',sans-serif; margin-top: 20px; align-items: center;">
+                                <!-- Logo Section -->
+                                <div class="col-5" style="text-align:left;">
+                                    <img src="/sale_order_report/static/description/siemens_logo.jpg" style="height: 100px;" />
                                 </div>
+                                <div class="col-5" style="text-align:right; padding-right: 5px;">
+                                    <img t-if="res_company.logo" class="border" t-att-src="image_data_uri(res_company.logo)" alt="Logo" style="height:100px;" />
+                                </div>
+                            </div>
 
-                                <div class="col-7 mt-5">
-                                    <div style="text-align:right" >
-                                        <img t-if="res_company.logo" class="border" t-att-src="image_data_uri(res_company.logo)" alt="Logo"
-                                             style="text-align:right; height:100px;"/>
-                                    </div>
-                                    <h5 style="font-size:16px; text-align:center; text-transform: uppercase; font-weight: bold;  margin-top:20px   ">
-                                        <t t-out="doc.satis_siprais_basligi "  />
+                            <!-- Title Section -->
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-12" style="text-align:center;">
+                                    <h5 style="font-size:18px; text-transform: uppercase; font-weight: bold; margin-top: 20px;">
+                                        <t t-out="doc.satis_siprais_basligi" />
                                     </h5>
                                 </div>
-
                             </div>
+
+
 
                             <!--                            <hr style="height:2px;border-width:0;color:gray;background-color:gray"></hr>-->
 
@@ -710,58 +713,6 @@
                             </table>
 
 
-
-                            <!--                            <div class="row" style="margin-top:30px;">-->
-                            <!--                                <div class="col-12">-->
-                            <!--                                    <table class="table table-sm table-bordered">-->
-                            <!--                                        <thead>-->
-                            <!--                                            <tr style="background-color:#191970;color:white">-->
-                            <!--                                                <th class="col-1 text-center text-white text-capitalize">sr.no</th>-->
-                            <!--                                                <th class="col-2 text-center text-white text-capitalize">Sipariş No:</th>-->
-                            <!--                                                <th class="col-5 text-center text-white text-capitalize"> Açıklama </th>-->
-                            <!--                                                <th class="col-1 text-center text-white text-capitalize"> Birim </th>-->
-                            <!--                                                <th class="col-1 text-center text-white text-capitalize">Miktar</th>-->
-                            <!--                                                <th class="col-2 text-center text-white text-capitalize">Birim Fiyat</th>-->
-                            <!--                                                &lt;!&ndash;                                                <th class="text-center text-white text-capitalize">vergiler  </th>&ndash;&gt;-->
-                            <!--                                                <th class="col-2 text-center text-white text-capitalize">Toplam Fiyat </th>-->
-                            <!--                                            </tr>-->
-                            <!--                                        </thead>-->
-                            <!--                                        <tbody>-->
-                            <!--                                            <t t-set="counter" t-value="1"/>-->
-                            <!--                                            <t t-set="total_price" t-value="0"/>-->
-                            <!--                                            <tr t-foreach="doc.order_line" t-as="line" class="text-center">-->
-                            <!--                                                <td>-->
-                            <!--                                                    <span t-esc="counter"/>-->
-                            <!--                                                </td>-->
-                            <!--                                                <td class="text-left">-->
-                            <!--                                                    <span t-field="line.product_template_id"/>-->
-                            <!--                                                </td>-->
-                            <!--                                                <td class="text-left">-->
-                            <!--                                                    <span t-field="line.product_id.description_sale"/>-->
-                            <!--                                                </td>-->
-                            <!--                                                <td>-->
-                            <!--                                                    <span t-field="line.product_uom"/>-->
-                            <!--                                                </td>-->
-                            <!--                                                <td>-->
-                            <!--                                                    <span t-field="line.product_uom_qty"/>-->
-                            <!--                                                </td>-->
-                            <!--                                                <td>-->
-                            <!--                                                    <span t-field="line.price_unit"/>-->
-                            <!--                                                </td>-->
-                            <!--                                                &lt;!&ndash;                                                <td>&ndash;&gt;-->
-                            <!--                                                &lt;!&ndash;                                                    <t t-esc="line.tax_id.amount"/>&ndash;&gt;-->
-                            <!--                                                &lt;!&ndash;                                                </td>&ndash;&gt;-->
-                            <!--                                                <td>-->
-                            <!--                                                    <span t-esc="'{0:,.2f}'.format(line.price_subtotal)" /> <t t-esc="doc.currency_id.symbol"/>-->
-                            <!--                                                    <t t-set="total_price" t-value="total_price + line.price_subtotal"/>-->
-                            <!--                                                </td>-->
-                            <!--                                                <t t-set="counter" t-value="counter+1"/>-->
-                            <!--                                            </tr>-->
-                            <!--                                        </tbody>-->
-                            <!--                                    </table>-->
-                            <!--                                </div>-->
-                            <!--                            </div>-->
-
                             <br/>
                             <t t-set="lines_to_report" t-value="doc._get_order_lines_to_report()"/>
                             <t t-set="display_discount" t-value="any(l.discount for l in lines_to_report)"/>
@@ -850,21 +801,7 @@
             <field name="dpi">90</field>
         </record>
 
-        <!--    <record id="paperformat_fhs_contrato_encomienda"  model="report.paperformat">-->
-        <!--            <field name="name">European A4 Landscape</field>-->
-        <!--            <field name="default" eval="True"/>-->
-        <!--            <field name="format">A4</field>-->
-        <!--            <field name="page_height">0</field>-->
-        <!--            <field name="page_width">0</field>-->
-        <!--            <field name="orientation">Portrait</field>-->
-        <!--            <field name="margin_top">10</field>-->
-        <!--            <field name="margin_bottom">13</field>-->
-        <!--            <field name="margin_left">7</field>-->
-        <!--            <field name="margin_right">7</field>-->
-        <!--            <field name="header_line" eval="False"/>-->
-        <!--            <field name="header_spacing">15</field>-->
-        <!--            <field name="dpi">90</field>-->
-        <!--        </record>-->
+
 
 
         <record id="report_teklif_detail" model="ir.actions.report">

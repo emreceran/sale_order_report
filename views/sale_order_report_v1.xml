@@ -4,14 +4,20 @@
         <!-- Yeni Rapor Tanımı -->
 
 
+
+
+
+
         <template id="new_sale_order_template">
             <t t-call="web.html_container">
+
                 <t t-foreach="docs" t-as="doc">
+                    <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
                     <t t-call="web.external_layout">
-                        <div class="page">
+                        <div class="page" style="position:absolute; top:2px; width:100%; padding-right:25px;" >
 
                             <!-- Üst Bilgi: Müşteri Bilgileri ve Teklif Bilgisi -->
-                            <div class="row mt-5 mb-4">
+                            <div class="row mb-4">
                                 <!-- Sol tarafta müşteri bilgileri -->
                                 <div class="col-4">
                                     <div>
@@ -38,7 +44,7 @@
                             </div>
 
                             <!-- Ek Bilgiler -->
-                            <div class="row mt-1 mb-4" id="informations">
+                            <div class="row mt-1 mb-4">
                                 <div t-if="doc.client_order_ref" class="col-auto col-4 mw-100 mb-2" name="informations_reference">
                                     <strong>Referansınız:</strong>
                                     <p class="m-0" t-field="doc.client_order_ref"/>
@@ -61,9 +67,9 @@
                             <t t-set="display_discount" t-value="any(l.discount for l in lines_to_report)"/>
 
 
-                            <table class="table table-sm o_main_table table-bordered mt-1">
-                                <!-- In case we want to repeat the header, remove "display: table-row-group" -->
-                                <thead style="display: table-row-group">
+                            <table class="table table-sm" style="font-size: 10px;">
+                                <!-- Tablo Başlıkları -->
+                                <thead style="display: table-header-group;">
                                     <tr>
 
                                         <th name="th_name" class="col-2 text-center">Malzeme Kodu</th>
@@ -186,17 +192,33 @@
             </t>
         </template>
 
+          <record id="teklif_sade_paperformat" model="report.paperformat">
+            <field name="name">Customized Paper Format</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">25</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
+
 
 
         <record id="new_sale_order_report" model="ir.actions.report">
-            <field name="name">Teklif sadeli</field>
+            <field name="name">Teklif Basit</field>
             <field name="model">sale.order</field>
             <field name="report_type">qweb-pdf</field>
             <field name="report_name">sale_order_report.new_sale_order_template</field>
             <field name="report_file">sale_order_report.new_sale_order_template</field>
             <field name="binding_model_id" ref="sale.model_sale_order"/>
             <field name="binding_type">report</field>
-            <field name="paperformat_id" ref="sale_order_report.sale_order_report_paperformat"/>
+            <field name="paperformat_id" ref="sale_order_report.teklif_sade_paperformat"/>
         </record>
     </data>
 </odoo>
