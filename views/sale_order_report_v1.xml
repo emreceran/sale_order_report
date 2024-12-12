@@ -115,12 +115,12 @@
                                         <tr t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
                                             <t t-if="not line.display_type">
 
-                                                <td name="td_name" class="text-center"><span t-field="line.product_template_id"/></td>
+                                                <td name="td_name" class="align-top text-center"><span t-field="line.product_template_id"/></td>
                                                 <td class="text-right">
                                                     <img t-if="line.image_128" t-att-src="image_data_uri(line.image_128)" class="product-image"/>
                                                 </td>
 
-                                                <td name="td_description" class="text-center"><small class="fs-8" t-field="line.product_id.description_sale"/></td>
+                                                <td name="td_description" class="align-top text-center"><small class="fs-8" t-field="line.product_id.description_sale"/></td>
 
                                                 <td name="td_quantity" class="text-end">
                                                     <span t-esc="'%.0f' % line.product_uom_qty"/>
