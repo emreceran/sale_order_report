@@ -91,13 +91,13 @@
 
                                         <th name="th_description" class="text-center">Açıklama</th>
                                         <th name="th_quantity" class="text-end">Miktar</th>
-                                        <th name="th_priceunit" class="text-end">Birim Fiyat</th>
+                                        <th name="th_priceunit" class="text-nowrap text-end">Br Fiyat</th>
                                         <th name="th_discount" t-if="display_discount" class="text-end">
                                             <span>İnd.%</span>
                                         </th>
 
                                         <th name="th_subtotal" class="text-end">
-                                            <span groups="account.group_show_line_subtotals_tax_excluded">Tutar</span>
+                                            <span groups="account.group_show_line_subtotals_tax_excluded">Toplam</span>
                                             <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
                                         </th>
                                     </tr>
